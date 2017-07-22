@@ -1,0 +1,16 @@
+java反射例子
+
+1. 类装载器工作机制 ： 类装载器就是寻找类的字节码文件并构造出类的JVM内部表示的对象组件
+	1. 装载 ： 查找和导入Class文件
+	2. 链接
+		1. 校验 ：校验Class文件的正确性
+		2. 准备 ： 给类的静态变量分配存储空间
+		3. 解析 ：将符号引用转成直接引用
+	3. 初始化 ： 对类的静态变量，静态代码块执行初始化工作
+
+2. 类加载器 ：	
+	1. ClassLoader：C++编写，加载核心类库 ： rt.jar,  charsets.jar等
+	2. ExtClassLoader ：负责ext中的JAR类包
+	3. AppClassLoader ： 负责装载ClassPath路径下面的包
+
+3. 每个类在JVM中都拥有一个对一个的Class对象，Class没有public构造方法，Class对象实在装载类时有JVM通过调用类装载器重的defineClass()方法自动构造的。

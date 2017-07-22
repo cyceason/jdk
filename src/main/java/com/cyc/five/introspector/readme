@@ -1,0 +1,5 @@
+内省
+	1. Java中提供了一套API用来访问某个属性的getter /setter方法，通过这些API可以使你不需要了解这个规则
+		，这些API存放于包java.beans中
+	2. 可以没有对应的字段，但是一定要有 get/set
+	3. BeanUtils : apache 工具包，快速开发

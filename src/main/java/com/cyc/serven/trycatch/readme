@@ -1,0 +1,2 @@
+jdk7之前，你必须用try{}finally{}在try内使用资源，在finally中关闭资源； 
+jdk7之后，你可以不必要写finally语句来关闭资源，只要你在try()的括号内部定义要使用的资源

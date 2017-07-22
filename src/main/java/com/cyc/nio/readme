@@ -1,0 +1,8 @@
+新io， 非阻塞式I/O
+	java NIO采用了双向通道（channel）进行数据传输，而不是单向的流（stream），在通道上可以注册我们感兴趣的事件。一共有以下四种事件：
+	事件名					对应值
+	服务端接收客户端连接事件		SelectionKey.OP_ACCEPT(16)
+	客户端连接服务端事件			SelectionKey.OP_CONNECT(8)
+	读事件					SelectionKey.OP_READ(1)
+	写事件					SelectionKey.OP_WRITE(4)
+	

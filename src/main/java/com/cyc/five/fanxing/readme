@@ -1,0 +1,14 @@
+泛型
+
+1. 通配符 ： 可以接收任意的泛型对象   ： 例如	Info<?>
+
+2. 受限泛型 ：
+	1. Info<? extends Number>	：	只能接收Number及其Number的子类
+	2. Info<? super String>		：	只能接收String或Object类型的泛型 
+	
+3. 泛型方法 : 在实例化类的时候，不用指定类型，比较灵活。
+	public <T> T fun(T t) { // 可以接收任意类型的数据
+		return t; // 直接把参数返回
+	}
+	
+

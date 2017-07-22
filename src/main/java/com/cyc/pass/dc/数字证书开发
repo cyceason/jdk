@@ -1,0 +1,5 @@
+数字证书开发
+    1. 可以通过keystore中获取私钥跟公钥
+    2. 公钥的获取也可以通过xx.cer路径获取
+    3. 如果需要签名，则需要获取Certificate，转换为X509Certificate，主要是为了获取X509Certificate中的签名算法
+    4. 如果需要验证签名，也需要获取Certificate，转换为X509Certificate
