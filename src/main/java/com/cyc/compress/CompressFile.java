@@ -12,6 +12,11 @@ import java.io.IOException;
 public class CompressFile {
     public static final char SEPARATORCHAR = File.separatorChar;
 
+    public static void main(String[] args) {
+        CompressFile.compress("C:\\Users\\Administrator\\Desktop\\内蒙食品追朔",
+                "C:\\Users\\Administrator\\Desktop\\新建文件夹");
+    }
+
     /**
      * 入口
      *
@@ -23,11 +28,11 @@ public class CompressFile {
             throw new RuntimeException("输入路径或者输出路径不能为空");
         }
         ZipArchiveOutputStream zos = null;
-        File zipFile = null;
-        File inputFile = new File(inputPath);
-        String rootPath = inputFile.getName();
-        zipFile = new File(outputPath + SEPARATORCHAR + rootPath + ".zip");
         try {
+            File inputFile = new File(inputPath);
+            String rootPath = inputFile.getName();
+            File zipFile = new File(outputPath + SEPARATORCHAR + rootPath + ".zip");
+
             zos = new ZipArchiveOutputStream(zipFile);
             compressFiles(inputFile, zos, rootPath);
         } catch (IOException e) {
@@ -46,6 +51,7 @@ public class CompressFile {
      * @param rootPath
      * @throws IOException
      */
+
     private static void compressFiles(File files, ZipArchiveOutputStream zos, String rootPath) throws IOException {
         if (files.isDirectory()) {
             File[] listFiles = files.listFiles();
@@ -76,11 +82,6 @@ public class CompressFile {
         zos.putArchiveEntry(ze);
         IOUtils.copy(new FileInputStream(file), zos);
         zos.closeArchiveEntry();// 关闭当前文件
-    }
-
-    public static void main(String[] args) {
-        CompressFile.compress("C:\\Users\\Administrator\\Desktop\\内蒙食品追朔",
-                "C:\\Users\\Administrator\\Desktop\\新建文件夹");
     }
 
 }
