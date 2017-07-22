@@ -10,9 +10,8 @@ public class Classmate {
     public void executeMessage(String msg, CallBack callBack) {
 
         /** 处理消息 **/
-        System.out.println(msg);
-        System.out.println("my classmate hava executed the message by I");
+        System.out.println("同学收到我的消息 ：" + msg);
         /** 执行回调 **/
-        callBack.execute(" done ! "); // 这相当于同学执行完之后打电话给你
+        callBack.execute("同学处理完毕我的事情");
     }
 }

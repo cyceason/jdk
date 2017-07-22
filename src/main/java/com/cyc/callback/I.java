@@ -20,20 +20,20 @@ public class I implements CallBack, Runnable {
     public void sendMessage() {
         /** 创建一个新的线程发送消息 **/
         Thread thread = new Thread(this);
-        System.out.println(thread.getName());
+        System.out.println("发送消息线程 ： " + thread.getName());
         thread.start();
         /** 当前线程继续执行 **/
-        System.out.println("I send a message to my classmate");
+        System.out.println("我已经发送消息给我同学");
     }
 
     /**
      * 发送消息后的回调函数
      */
     public void execute(Object... objects) {
-        /** 打印返回的消息 **/
-        System.out.println(objects[0]);
         /** 打印发送消息的线程名称 **/
-        System.out.println(Thread.currentThread().getName());
+        System.out.println("执行回调线程 ： " + Thread.currentThread().getName());
+        /** 打印返回的消息 **/
+        System.out.println("我收到同学回给我的消息 ： " + objects[0]);
         /** 中断发送消息的线程 **/
         Thread.interrupted();
     }
