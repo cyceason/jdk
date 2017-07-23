@@ -1,9 +1,11 @@
 package com.cyc.eight.lambda;
 
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * lambda表达式, 语法 ： 1. (params) -> expression    2. (params) -> statement    3. (params) -> { statements }
@@ -16,9 +18,12 @@ import java.util.stream.Collectors;
  */
 public class LambdaTest {
     public static void main(String[] args) {
-        test3();
+        test1();
     }
 
+    /**
+     * Lambda表达式简单例子
+     */
     public static void test0() {
         Predicate<Integer> bigerThan6 = x -> x > 6;//声明一个Lambda表达式
         System.out.println(bigerThan6.test(7)); //结果是 true
@@ -26,19 +31,47 @@ public class LambdaTest {
     }
 
     /**
-     * 代替匿名函数
+     * Stream对集合的操作, filter, count, collect, map
      */
     public static void test1() {
-        // 匿名类写法
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Before Java8, too much code for too little to do");
-            }
-        }).start();
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 
-        //　lambda表达式写法
-        new Thread(() -> System.out.println("In Java8, Lambda expression rocks !!")).start();
+        long count = list.stream().filter(i -> {
+            // 类似spark， 需要count里面的内容才会打印，否则不会打印
+            System.out.println(i);
+            return i > 2;
+        }).count();
+        System.out.println("count : " + count);
+
+        List<Integer> list2 = list.stream().filter(i -> i > 1).collect(Collectors.toList());
+        System.out.println("list2 : " + list2);
+
+
+        // map的意思是，1对1转换
+        List<Integer> list3 = list.stream().map(i -> i + 1).collect(Collectors.toList());
+        System.out.println("list3 : " + list3);
+
+        // flatMap：和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中
+        List<Integer> list4 = Stream.of(list, list3).flatMap(num -> num.stream()).collect(Collectors.toList());
+        System.out.println("list4 : " + list4);
+        // flatMap例子2
+        List<Integer> list5 = list.stream().flatMap(i -> Stream.of(i, i - 10)).collect(Collectors.toList());
+        System.out.println("list5 : " + list5);
+
+        // reduce 操作
+        Integer[] integerArray = new Integer[]{1, 2, 3, 4};
+        int sumAll = Stream.of(integerArray).reduce(0, (sum, element) -> {
+            System.out.println("sum : " + element);
+            System.out.println("element : " + element);
+            return sum + element;
+        });// 给一个0是用来启动，的，若给-1，结果会是9
+        System.out.println("sumAll : " + sumAll);
+
+        // mapToInt用法　：　借助Stream对集合类进行统计
+        IntSummaryStatistics intSummaryStatistics = list.stream().mapToInt(i -> i).summaryStatistics();
+        System.out.println("最大值 ： " + intSummaryStatistics.getMax());
+        System.out.println("最小值 ： " + intSummaryStatistics.getMin());
+
     }
 
     /**
@@ -65,48 +98,6 @@ public class LambdaTest {
         List<Integer> list = Arrays.asList(1, 2, 3, 4);
         List<Integer> personSublist = list.stream().filter(i -> i > 2).collect(Collectors.toList());
         System.out.println(personSublist);
-
-    }
-
-
-    /**
-     * 最简单的Lambda表达式可由逗号分隔的参数列表、->符号和语句块组成
-     */
-    public static void simpleTest() {
-        /*
-         * 最简单的Lambda表达式可由逗号分隔的参数列表、->符号和语句块组成
-         */
-        Arrays.asList("a", "b", "d").forEach(e -> System.out.println(e));
-        System.out.println("--------------------------------------");
-        /*
-        在上面这个代码中的参数e的类型是由编译器推理得出的，你也可以显式指定该参数的类型，例如：
-         */
-        Arrays.asList("a", "b", "d").forEach((String e) -> System.out.println(e));
-        System.out.println("--------------------------------------");
-        /*
-        如果Lambda表达式需要更复杂的语句块，则可以使用花括号将该语句块括起来，类似于Java中的函数体，例如：
-         */
-        Arrays.asList("a", "b", "d").forEach(e -> {
-            System.out.print(e);
-            System.out.print(e);
-        });
-        System.out.println("--------------------------------------");
-
-        /*
-        Lambda表达式可以引用类成员和局部变量（会将这些变量隐式得转换成final的）
-         */
-        String separator = ",";
-        Arrays.asList("a", "b", "d").forEach(
-                (String e) -> System.out.println(e + separator));
-
-        System.out.println("--------------------------------------");
-        /*
-        Lambda表达式有返回值，返回值的类型也由编译器推理得出。如果Lambda表达式中的语句块只有一行，则可以不用使用return语句
-         */
-        Arrays.asList("a", "b", "d").sort((e1, e2) -> {
-            int result = e1.compareTo(e2);
-            return result;
-        });
 
     }
 
