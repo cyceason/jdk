@@ -1,8 +1,6 @@
 package com.cyc.eight.lambda;
 
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,8 +15,8 @@ import java.util.stream.Stream;
  * Created by cyc_e on 2017/7/11.
  */
 public class LambdaTest {
-    public static void main(String[] args) {
-        test1();
+    public static void main(String[] args) throws Exception {
+        test2();
     }
 
     /**
@@ -75,30 +73,38 @@ public class LambdaTest {
     }
 
     /**
-     * 使用lambda表达式对列表进行迭代
+     * 使用双冒号运算， 格式是 ： 类名::方法名
+     * 1. person -> person.getAge()  转换为 ：Person::getAge
+     * 2. () -> new HashMap<>();     转换为 ： HashMap::new
      */
     public static void test2() {
+        List<String> list = Arrays.asList("a", "b", "c");
 
-        // Java 8之前：
-        List<String> list = Arrays.asList("1", "2", "3");
-        for (String feature : list) {
-            System.out.println(feature);
-        }
-
-        // Java 8之后：
+        // Lambda表达式：
         list.forEach(n -> System.out.println(n));
 
-        // 使用Java 8的方法引用更方便，方法引用由::双冒号操作符标示，
-        // 看起来像C++的作用域解析运算符
+        // 使用双冒号运算
         list.forEach(System.out::println);
 
+        // Lambda表达式：
+        List<String> list1 = list.stream().map(n -> n.toUpperCase()).collect(Collectors.toList());
+        System.out.println(list1);
+
+        // 使用双冒号运算
+        List<String> list2 = list.stream().map(String::toUpperCase).collect(Collectors.toList());
+        System.out.println(list2);
+
+        // 使用双冒号运算
+        List<String> list3 = list.stream().map(String::toUpperCase).collect(Collectors.toCollection(ArrayList::new));//注意发生的变化
+        System.out.println(list3);
     }
 
-    public static void test3() {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4);
-        List<Integer> personSublist = list.stream().filter(i -> i > 2).collect(Collectors.toList());
-        System.out.println(personSublist);
-
+    public static void test3() throws Exception {
+        Integer testInt[] = {};//空数组
+        Optional<Integer> sumAll = Stream.of(testInt).reduce(Integer::sum);
+        sumAll.ifPresent(x -> System.out.println(x));//sumAll不为空的时候，打印x的值；为空的时候，不做任何操作
+        System.out.println(sumAll.orElse(0));// 给Optional一个默认值0
+        sumAll.orElseThrow(() -> new Exception("不能为空")); // 抛出异常
     }
 
 
