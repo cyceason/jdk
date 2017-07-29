@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  */
 public class LambdaTest {
     public static void main(String[] args) throws Exception {
-        test2();
+        test3();
     }
 
     /**
@@ -99,12 +99,36 @@ public class LambdaTest {
         System.out.println(list3);
     }
 
+    /**
+     * Optional是Java8里面用避免空指针的
+     *
+     * @throws Exception
+     */
     public static void test3() throws Exception {
-        Integer testInt[] = {};//空数组
+        Integer testInt[] = {1, 2, 3, 4};//空数组
         Optional<Integer> sumAll = Stream.of(testInt).reduce(Integer::sum);
         sumAll.ifPresent(x -> System.out.println(x));//sumAll不为空的时候，打印x的值；为空的时候，不做任何操作
-        System.out.println(sumAll.orElse(0));// 给Optional一个默认值0
+        System.out.println(sumAll.orElse(0));// 给Optional一个默认值0，默认值是先new出来的
+//        System.out.println(sumAll.orElseGet(() -> 0));// 给Optional一个默认值0， 缺省时再去new
         sumAll.orElseThrow(() -> new Exception("不能为空")); // 抛出异常
+
+        // 以上所有例子中Optional都是方法返回给我们的，其实我们也可以自己new 一个Optional但是不是使用new关键字。而是使用 of(T)以及ofNullable(T) 等方法
+        Optional<List<Integer>> optional = Optional.of(new ArrayList<>());//of()里面不能传入null, Of里面必须输入一个值，也就是说使用of创建的Optional对象一定不是empty的
+        System.out.println(optional.get()); // []
+        Optional<List<Integer>> optional1 = Optional.ofNullable(new ArrayList<>());// ofNullable是可以创建一个empty的Optional对象
+        System.out.println(optional1.get()); // []
+        Optional<List<Integer>> emptyOptional = Optional.empty();
+        Optional<List<Integer>> emptyOptional2 = Optional.ofNullable(null);
+        System.out.println(emptyOptional.equals(emptyOptional2)); //true
+
+        // Optional除了这么苍白地使用，还可配合过滤转换一起使用
+        System.out.println(sumAll.filter(x -> x > 7));//Optional[10]
+
+        // flatMap里面传入的东西必须是Optional对象
+        String testS[] = {"hello", " ", "world", " ", "!"};
+        Optional<String> sumAll2 = Stream.of(testS).reduce(String::concat);
+        System.out.println(sumAll2.flatMap(x -> Optional.ofNullable(null)));//Optional.empty
+        System.out.println(sumAll2.flatMap(x -> Optional.of(x.toUpperCase())));//Optional[HELLO WORLD !]
     }
 
 
