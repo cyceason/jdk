@@ -1,0 +1,9 @@
+CyclicBarrier 使用
+    1. 加计数方式
+    2. 计数达到指定值时释放所有等待线程
+    3. 计数达到指定值时，计数置为0重新开始
+    4，调用await()方法计数加1，若加1后的值不等于构造方法的值，则线程阻塞
+    5. 可重复利用
+
+    public int await() throws InterruptedException, BrokenBarrierException { };//挂起当前线程，直至所有线程都到达barrier状态再同时执行后续任务；
+    public int await(long timeout, TimeUnit unit)throws InterruptedException,BrokenBarrierException,TimeoutException { };//让这些线程等待至一定的时间，如果还有线程没有到达barrier状态就直接让到达barrier的线程执行后续任务
