@@ -28,9 +28,8 @@ public class CountDownlatchTest {
         @Override
         public void run() {
             synchronized (this) {
-                System.out.println("id:" + id);
-                latch.countDown();
                 System.out.println("线程组任务" + id + "结束，其他任务继续");
+                latch.countDown();
             }
         }
     }
