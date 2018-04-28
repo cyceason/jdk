@@ -1,0 +1,10 @@
+CountDownLatch 使用
+    1. 减计数方式
+    2. 计算为0时释放所有等待的线程
+    3. 计数为0时，无法重置
+    4，调用countDown()方法计数减一，调用await()方法只进行阻塞，对计数没任何影响
+    5. 不可重复利用
+
+    public void await() throws InterruptedException { };   //调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行
+    public boolean await(long timeout, TimeUnit unit) throws InterruptedException { };  //和await()类似，只不过等待一定的时间后count值还没变为0的话就会继续执行
+    public void countDown() { };  //将count值减1
