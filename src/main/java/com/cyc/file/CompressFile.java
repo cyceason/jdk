@@ -1,4 +1,4 @@
-package com.cyc.compress;
+package com.cyc.file;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
