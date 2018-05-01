@@ -12,7 +12,7 @@ package com.cyc.eight.lambda;
  * Created by cyc_e on 2018/5/1.
  */
 public class Java8Tester {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Java8Tester tester = new Java8Tester();
 
         // 类型声明
