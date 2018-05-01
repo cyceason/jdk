@@ -16,46 +16,26 @@ import java.util.stream.Stream;
  */
 public class LambdaTest {
     public static void main(String[] args) throws Exception {
-        test3();
+        test1();
+
     }
 
     /**
      * Lambda表达式简单例子
      */
     public static void test0() {
-        Predicate<Integer> bigerThan6 = x -> x > 6;//声明一个Lambda表达式
-        System.out.println(bigerThan6.test(7)); //结果是 true
-        System.out.println(bigerThan6.negate().test(7));// 结果是false
+        //声明一个Lambda表达式
+        Predicate<Integer> bigerThan6 = x -> x > 6;
+        //结果是 true
+        System.out.println(bigerThan6.test(7));
+        // 结果是false
+        System.out.println(bigerThan6.negate().test(7));
     }
 
     /**
      * Stream对集合的操作, filter, count, collect, map
      */
     public static void test1() {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-
-        long count = list.stream().filter(i -> {
-            // 类似spark， 需要count里面的内容才会打印，否则不会打印
-            System.out.println(i);
-            return i > 2;
-        }).count();
-        System.out.println("count : " + count);
-
-        List<Integer> list2 = list.stream().filter(i -> i > 1).collect(Collectors.toList());
-        System.out.println("list2 : " + list2);
-
-
-        // map的意思是，1对1转换
-        List<Integer> list3 = list.stream().map(i -> i + 1).collect(Collectors.toList());
-        System.out.println("list3 : " + list3);
-
-        // flatMap：和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中
-        List<Integer> list4 = Stream.of(list, list3).flatMap(num -> num.stream()).collect(Collectors.toList());
-        System.out.println("list4 : " + list4);
-        // flatMap例子2
-        List<Integer> list5 = list.stream().flatMap(i -> Stream.of(i, i - 10)).collect(Collectors.toList());
-        System.out.println("list5 : " + list5);
-
         // reduce 操作
         Integer[] integerArray = new Integer[]{1, 2, 3, 4};
         int sumAll = Stream.of(integerArray).reduce(0, (sum, element) -> {
@@ -66,6 +46,7 @@ public class LambdaTest {
         System.out.println("sumAll : " + sumAll);
 
         // mapToInt用法　：　借助Stream对集合类进行统计
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         IntSummaryStatistics intSummaryStatistics = list.stream().mapToInt(i -> i).summaryStatistics();
         System.out.println("最大值 ： " + intSummaryStatistics.getMax());
         System.out.println("最小值 ： " + intSummaryStatistics.getMin());
@@ -95,7 +76,8 @@ public class LambdaTest {
         System.out.println(list2);
 
         // 使用双冒号运算
-        List<String> list3 = list.stream().map(String::toUpperCase).collect(Collectors.toCollection(ArrayList::new));//注意发生的变化
+        //注意发生的变化
+        List<String> list3 = list.stream().map(String::toUpperCase).collect(Collectors.toCollection(ArrayList::new));
         System.out.println(list3);
     }
 

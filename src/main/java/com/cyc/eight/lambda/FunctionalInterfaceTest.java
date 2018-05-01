@@ -10,7 +10,7 @@ public interface FunctionalInterfaceTest {
     /**
      * 抽象方法
      */
-    public abstract void functionalInterfaceTest();
+    void functionalInterfaceTest();
 
 
     default void defaultMethod1() {
