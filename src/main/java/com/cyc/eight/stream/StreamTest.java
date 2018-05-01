@@ -1,4 +1,4 @@
-package com.cyc.eight.lambda;
+package com.cyc.eight.stream;
 
 import java.util.Arrays;
 import java.util.List;

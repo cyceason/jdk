@@ -1,12 +1,3 @@
-lambda
-1.
-    objectName::instanceMethod
-    ClassName::staticMethod
-    ClassName::instanceMethod
-    如  System.out::println等同于x->System.out.println(x)；Math::max等同于(x, y)->Math.max(x,y)
-        BigDecimal::new等同于x->new BigDecimal(x)
-
-
 Stream
 1.Stream是元素的集合，这点让Stream看起来用些类似Iterator；
 2.可以支持顺序和并行的对原Stream进行汇聚的操作；
