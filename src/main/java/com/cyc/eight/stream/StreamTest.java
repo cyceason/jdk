@@ -1,6 +1,7 @@
 package com.cyc.eight.stream;
 
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
  */
 public class StreamTest {
     public static void main(String[] args) {
-        testReduce();
+        test2();
     }
 
     /**
@@ -33,7 +34,7 @@ public class StreamTest {
     }
 
     /**
-     * 测试FlatMap
+     * 测试FlatMap, flatMap方法，可以将多个容器的元素全部映射到一个容器中，即为扁平的map
      */
     public static void testFlatMap() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
@@ -54,4 +55,16 @@ public class StreamTest {
                 // peek : 生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例），新Stream每个元素被消费的时候都会执行给定的消费函数
                         peek(System.out::println).skip(2).limit(4).sum());
     }
+
+    /**
+     * 统计信息
+     */
+    public static void test2() {
+        List<Integer> list1 = Arrays.asList(1, 3, 5, 7, 9, 11);
+        IntSummaryStatistics statistics = list1.stream().filter(integer -> integer > 2).mapToInt(i -> i * 2).skip(2).limit(2).summaryStatistics();
+        System.out.println(statistics.getMax());
+        System.out.println(statistics.getMin());
+        System.out.println(statistics.getAverage());
+    }
+
 }

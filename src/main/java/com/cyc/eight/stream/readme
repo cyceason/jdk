@@ -12,9 +12,12 @@ Stream
     2. filter: 对于Stream中包含的元素使用给定的过滤函数进行过滤操作
     3. map: 对于Stream中包含的元素使用给定的转换函数进行转换操作
     4. flatMap：和map类似，flatMap是每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中
+        1. flatMap方法，可以将多个容器的元素全部映射到一个容器中，即为扁平的map
     5. peek: 生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例），新Stream每个元素被消费的时候都会执行给定的消费函数
     6. limit: 对一个Stream进行截断操作，获取其前N个元素
     7. skip: 返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream
 5. Stream多次转换，不用担心性能问题
 6. Stream汇聚reduce
     1. reduce、collect、sum、max、count
+7. stream() − 为集合创建串行流。
+8. parallelStream() − 为集合创建并行流。
