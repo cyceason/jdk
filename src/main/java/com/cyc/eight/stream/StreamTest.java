@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class StreamTest {
     public static void main(String[] args) {
-        testGenerate();
+        testIterate();
     }
 
     /**
@@ -75,5 +75,13 @@ public class StreamTest {
         Stream<String> generate = Stream.generate(UUID.randomUUID()::toString).limit(10);
         generate.forEach(System.out::println);
     }
+
+    /**
+     * iterate方法：也是生成无限长度的Stream，和generator不同的是，其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环
+     */
+    public static void testIterate() {
+        Stream.iterate(1, item -> item + 2).limit(10).forEach(System.out::println);
+    }
+
 
 }
