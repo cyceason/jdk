@@ -3,6 +3,7 @@ package com.cyc.eight.stream;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class StreamTest {
     public static void main(String[] args) {
-        test2();
+        testGenerate();
     }
 
     /**
@@ -65,6 +66,14 @@ public class StreamTest {
         System.out.println(statistics.getMax());
         System.out.println(statistics.getMin());
         System.out.println(statistics.getAverage());
+    }
+
+    /**
+     * Stream.generate : 生成连续不断的流或者一个全部是随机数的流
+     */
+    public static void testGenerate() {
+        Stream<String> generate = Stream.generate(UUID.randomUUID()::toString).limit(10);
+        generate.forEach(System.out::println);
     }
 
 }
