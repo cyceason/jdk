@@ -1,7 +1,7 @@
 package com.cyc.eight.lambda;
 
 /**
- * lambda表达式, 语法 ： 1. (params) -> expression    2. (params) -> statement    3. (params) -> { statements }
+ * lambda表达式, 语法 ： 1. (params) -> expression    2. (params) -> statement    3. (params) -> { statements; }
  * params 代表接口唯一方法中的入参；expression 代表接口唯一方法中的方法体
  * 特性
  * 1. 可选类型声明 - 无需声明参数的类型。编译器可以从该参数的值推断
