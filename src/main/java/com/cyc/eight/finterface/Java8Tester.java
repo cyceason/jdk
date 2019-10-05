@@ -9,16 +9,25 @@ import java.util.function.Predicate;
  * 2. 函数式接口可以被隐式转换为lambda表达式
  *
  * @FunctionalInterface注解， 如果接口符合1中的定义，则可以无需该注解，注解主要用于编译级错误检查
+ * JDK 1.8 之前已有的函数式接口:
+ * <p>
+ * java.lang.Runnable
+ * java.util.concurrent.Callable
+ * java.security.PrivilegedAction
+ * java.util.Comparator
+ * java.io.FileFilter
+ * java.nio.file.PathMatcher
+ * java.lang.reflect.InvocationHandler
+ * java.beans.PropertyChangeListener
+ * java.awt.event.ActionListener
+ * javax.swing.event.ChangeListener
+ * <p>
  * JDK 1.8 新增加的函数接口 ： java.util.function包下面
  * Created by cyc_e on 2018/5/1.
  */
 public class Java8Tester {
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-        // Predicate<Integer> predicate = n -> true
-        // n 是一个参数传递到 Predicate 接口的 test 方法
-        // n 如果存在则 test 方法返回 true
 
         System.out.println("输出所有数据:");
 
